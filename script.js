@@ -25,16 +25,16 @@ function newbox()
 
 function randaction()
 {
-	var axns = ["Read a book.", "Take a walk.", "Do some exercise.", "Meditate."];
-	return axns[Math.floor(Math.random()*axns.length)];
+	var arr = JSON.parse(localStorage["msgs"]);
+	return arr[Math.floor(Math.random()*arr.length)];
 }
 
 window.onload = function () {
 
-	var newbox = newbox();
-	box.parentNode.insertBefore(newbox, box);
+	var nb = newbox();
+	box.parentNode.insertBefore(nb, box);
 
-	var content = newbox.getElementsByClassName('userContentWrapper')[0];
+	var content = nb.getElementsByClassName('userContentWrapper')[0];
 	var action = randaction();
 	content.innerHTML = "\
 	<div class='fakebox'>\

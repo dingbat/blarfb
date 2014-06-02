@@ -53,6 +53,7 @@ function addMsg(txt)
 		if (e.keyCode == 13) {
 			tryDeleteNode(node);
 		}
+		updateStorage();
 	}	
 
 	//add to the array
