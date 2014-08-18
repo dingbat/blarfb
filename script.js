@@ -33,10 +33,7 @@ function randbox()
 
 function randaction()
 {
-	return "hi!";
-	var arr = localStorage["msgs"];
-	console.log("actions are = "+arr);
-	return arr[Math.floor(Math.random()*arr.length)];
+	return settings.msgs[Math.floor(Math.random()*settings.msgs.length)];
 }
 
 function newbox(abox) {
@@ -56,6 +53,7 @@ function newbox(abox) {
 }
 
 var numFakes = 0;
+var settings;
 
 function deposit() {
 	var abox = randbox();
@@ -66,9 +64,17 @@ function deposit() {
 }
 
 function updateRatio() {
+	console.log("settings = "+JSON.stringify(settings));
+
+	if (!settings || !settings.msgs || !settings.freq) {
+		return;
+	}
+
+	console.log("settings = "+settings+", and freq = "+settings.freq);
+
 	var numBoxes = boxes().length;
 
-	while ((numFakes/numBoxes) < 0.5) {
+	while ((numFakes/numBoxes) < (settings.freq/10)) {
 		deposit();
 	}
 }
@@ -78,6 +84,10 @@ function watchScroll() {
     clearTimeout(timeout);
     timeout = setTimeout(updateRatio, 20);
 }
+
+chrome.storage.local.get(["msgs", "freq"],function(result){
+	settings = result;
+});
 
 document.addEventListener("scroll", watchScroll);
 updateRatio();

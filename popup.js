@@ -5,10 +5,12 @@ function updateStorage()
 	var arr = [];
 	var msgs = document.getElementById('messages').childNodes;
 	for (var i = 0; i < msgs.length-1; i++) { //length-1 bc last one is placeholder
-		arr = arr.concat(msgs[i].value);
+		if (msgs[i].value && msgs[i].value.length > 0) {
+			arr = arr.concat(msgs[i].value);
+		}
 	}
 
-	localStorage["msgs"] = JSON.stringify(arr);
+	chrome.storage.local.set({"msgs":arr});
 }
 
 function tryDeleteNode(node)
@@ -22,8 +24,9 @@ function tryDeleteNode(node)
 
 function addMsg(txt)
 {
-	if (!txt && newmsg.value.length == 0)
+	if (!txt && newmsg.value.length == 0) {
 		return;
+	}
 
 	var br = document.createElement('br');
 	var node = document.createElement('input');
@@ -63,28 +66,31 @@ function addMsg(txt)
 window.onload = function () {
 	newmsg = document.getElementById('newmsg');
 
-	if (!localStorage["freq"])
-	{
-		localStorage["freq"] = 2;
-	}	
+	//update UI
+	chrome.storage.local.get(["freq", "msgs"], function(result){
+		var freq = result.freq;
+		//default
+		if (!freq) {
+			freq = 2;
+			chrome.storage.local.set({"freq":freq});
+		}
+		//update content to local storage
+		document.getElementById('freq').value = freq
 
-	if (!localStorage["msgs"])
-	{
-		//default messages
-		var defaults = ["Read a book.", "Take a walk.", "Do some exercise.", "Do the thing you have to do."];
-		localStorage["msgs"] = JSON.stringify(defaults);
-	}
 
-	//update content to local storage
-	document.getElementById('freq').value = localStorage["freq"];
-	var arr = JSON.parse(localStorage["msgs"]);
-	for (var i = 0; i < arr.length; i++) {
-		addMsg(arr[i]);
-	}
+		var msgs = result.msgs;
+		if (!msgs) {
+			msgs = ["Read a book.", "Take a walk.", "Do some exercise.", "Do the thing you have to do."];
+			chrome.storage.local.set({"msgs":msgs});
+		}
+		for (var i = 0; i < msgs.length; i++) {
+			addMsg(msgs[i]);
+		}
+	});
 
 	//handlers
 	document.getElementById('freq').onchange = function () {
-		localStorage["freq"] = document.getElementById('freq').value;
+		chrome.storage.local.set({"freq":document.getElementById('freq').value});
 	}
 
 	newmsg.onkeyup = function (e) {

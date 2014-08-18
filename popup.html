@@ -3,25 +3,19 @@
   <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="popup.css">
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
     <script src="popup.js"></script>
   </head>
   <body>
     <p>
       <div class="header">frequency</div>
-      a little <input type="range" id="freq" min="1" max="10"> a lot
+      a little <input type="range" id="freq" min="0" max="9"> a lot
     </p>
     <p>
       <div class="header">messages</div>
       <div id="messages">
-        <input class="msg" id="newmsg" type="text" placeholder="Add another..."><br>
+        <input class="msg" id="newmsg" type="text" placeholder="Add another...">
       </div>
+      <br>
     </p>
   </body>
 </html>
