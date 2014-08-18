@@ -1,44 +1,85 @@
-function randelem(arr) {
-	//return arr[0];
-	var idx;
-	do
-	{
-		idx = Math.floor(Math.random()*(Math.max(arr.length,5)));
+function isNotNested(node) {
+	//ignore if fake, or if previous is fake.
+	if (node.getElementsByClassName('fakebox').length > 0 ||
+		(node.parentNode.previousSibling && 
+		 node.parentNode.previousSibling.getElementsByClassName('fakebox').length > 0)) {
+		return false;
 	}
-	while (arr[idx].getElementsByClassName('userContentWrapper').length > 0);
 
-	return arr[idx];
+	while (node = node.parentNode) {
+		//ignore if a parent along the way has this, meaning our node is nested.
+		//also test to see if we're part of a list
+		if (node.classList && (node.classList.contains('userContentWrapper') || node.classList.contains('uiList'))) {
+			return false;
+		}
+	}
+	return true;
 }
 
-var template;
-function newbox()
-{
-	if (template)
-		return template.cloneNode(true);
+function randelem(items) {
+	return items[Math.floor(Math.pow(Math.random(), 1/3)*items.length)];
+}
 
+function boxes()
+{
 	var boxes = document.getElementsByClassName('userContentWrapper');
-	for (var i = 0; i < boxes.length; i++) {
-		if (boxes[i].getElementsByClassName('userContentWrapper').length == 0) //not a nested post
-			return boxes[i].parentNode.cloneNode(true);
-	}
+	return Array.prototype.filter.call(boxes, isNotNested);
+}
+
+function randbox()
+{
+	return randelem(boxes()).parentNode;
 }
 
 function randaction()
 {
-	var arr = JSON.parse(localStorage["msgs"]);
+	return "hi!";
+	var arr = localStorage["msgs"];
+	console.log("actions are = "+arr);
 	return arr[Math.floor(Math.random()*arr.length)];
 }
 
-window.onload = function () {
+function newbox(abox) {
 
-	var nb = newbox();
-	box.parentNode.insertBefore(nb, box);
-
-	var content = nb.getElementsByClassName('userContentWrapper')[0];
 	var action = randaction();
-	content.innerHTML = "\
+	var content = "\
 	<div class='fakebox'>\
 	<div class='headline'>Get off Facebook.</div>\
 	<div class='action'>"+action+"</div>\
 	</div>";
-};
+
+	box = document.createElement('div');
+	box.className = abox.className
+	box.innerHTML = "<div class='userContentWrapper'>"+content+"</div>";
+
+	return box;
+}
+
+var numFakes = 0;
+
+function deposit() {
+	var abox = randbox();
+	var anewbox = newbox(abox);
+	abox.parentNode.insertBefore(anewbox, abox);
+
+	numFakes++;
+}
+
+function updateRatio() {
+	var numBoxes = boxes().length;
+
+	while ((numFakes/numBoxes) < 0.5) {
+		deposit();
+	}
+}
+
+var timeout;
+function watchScroll() {
+    clearTimeout(timeout);
+    timeout = setTimeout(updateRatio, 20);
+}
+
+document.addEventListener("scroll", watchScroll);
+updateRatio();
+
+// setInterval(updateRatio, 1500);
