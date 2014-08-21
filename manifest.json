@@ -1,9 +1,13 @@
 {
   "manifest_version": 2,
 
-  "name": "aefiuajofjiaf",
+  "name": "blargh",
   "description": "facebook thing",
   "version": "1.0",
+
+  "icons": { "16": "brain-16.png",
+           "48": "brain-48.png",
+          "128": "brain-128.png" },
 
   "content_scripts": [
     {
