@@ -35,6 +35,8 @@
 			<string>blarfb.css</string>
 		</array>
 	</dict>
+	<key>Description</key>
+	<string>help urself get off fb</string>
 	<key>DeveloperIdentifier</key>
 	<string>HDC59YG25D</string>
 	<key>ExtensionInfoDictionaryVersion</key>
@@ -55,6 +57,6 @@
 		</dict>
 	</dict>
 	<key>Website</key>
-	<string>http://github.com/dingbat/blarfb</string>
+	<string>http://danhassin.com/projects</string>
 </dict>
 </plist>

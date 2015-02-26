@@ -1,12 +1,16 @@
 blarfb
 ======
 
-it does this
+it does this on chrome
 
-![](https://lh6.googleusercontent.com/l2pTjwnfkbjGsjMzgk1_xIHdTVGrgxuVYIbCDQjIvq9cpMqXqJTiu_IJquj2beeGiMhr4mPkhoE=s640-h400-e365-rw)
+![](http://danhassin.com/img/ss2.jpg)
+
+or this on safari
+
+![](http://danhassin.com/img/ss3.png)
 
 and then this
 
-![](https://lh4.googleusercontent.com/AfmBjPccUcGgykyQp0szSblqNM-f_cCDIxvWgMiwintYr8evQSXAg-VGZKlQztu9G9HSWbH9bIA=s640-h400-e365-rw)
+![](http://danhassin.com/img/blarfb.jpg)
 
-get it [here](https://chrome.google.com/webstore/detail/blarfb/japabiflacoedddenbhneajhepopkdif)
+get it [here](http://danhassin.com/projects#blarfb)
