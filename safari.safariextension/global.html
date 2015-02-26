@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+<script type="text/javascript">
+ 
+function respondToMessage(e) {
+    if(e.name === "freq") {
+        var freq=safari.extension.settings.frequency;
+        e.target.page.dispatchMessage("freq", freq);
+    }
+    if(e.name === "messages") {
+        var messages=safari.extension.settings.messages;
+        e.target.page.dispatchMessage("messages", messages);
+    }
+}
+ 
+safari.application.addEventListener("message",respondToMessage,false);
+
+</script>
+</head>
+<body>
+</body>
+</html>

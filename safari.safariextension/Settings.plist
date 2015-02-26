@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<real>3</real>
+		<key>Key</key>
+		<string>frequency</string>
+		<key>MaximumValue</key>
+		<real>10</real>
+		<key>MinimumValue</key>
+		<real>1</real>
+		<key>Title</key>
+		<string>frequency</string>
+		<key>Titles</key>
+		<array>
+			<string>hi</string>
+		</array>
+		<key>Type</key>
+		<string>Slider</string>
+		<key>Values</key>
+		<array>
+			<string>hi</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>Read a book., Take a walk., Do some exercise., Do the thing you have to do.</string>
+		<key>Key</key>
+		<string>messages</string>
+		<key>Title</key>
+		<string>messages</string>
+		<key>Titles</key>
+		<array>
+			<string>hi</string>
+		</array>
+		<key>Type</key>
+		<string>TextField</string>
+		<key>Values</key>
+		<array>
+			<string>value</string>
+		</array>
+	</dict>
+</array>
+</plist>
